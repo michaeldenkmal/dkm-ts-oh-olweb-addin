@@ -1,0 +1,1 @@
+office-addin-manifest validate manifest.xml

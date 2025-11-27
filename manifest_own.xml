@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp
+        xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+        xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+        xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+        xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0"
+        xsi:type="MailApp">
+
+    <Id>b8a2ea39-0f8d-4fc5-9c9e-58c9e3c86fc6</Id>
+    <Version>1.0.0.0</Version>
+
+    <ProviderName>Denkmal</ProviderName>
+    <DefaultLocale>de-AT</DefaultLocale>
+
+    <DisplayName DefaultValue="Denkmal Office Help Outlook Add-in" />
+    <Description DefaultValue="Denkmal Outlook AddIn für Office Help" />
+
+    <IconUrl DefaultValue="https://localhost:5173/assets/icon-32.png" />
+    <HighResolutionIconUrl DefaultValue="https://localhost:5173/assets/icon-64.png" />
+    <SupportUrl DefaultValue="https://localhost:5173/" />
+
+    <Hosts>
+        <Host Name="Mailbox" />
+    </Hosts>
+
+    <DefaultSettings>
+        <SourceLocation DefaultValue="https://localhost:5173/taskpane.html"/>
+    </DefaultSettings>
+
+    <Permissions>ReadWriteMailbox</Permissions>
+
+    <!-- Moderne Commands + SSO -->
+    <VersionOverrides
+            xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1"
+            xsi:type="VersionOverridesV1_1"
+            Version="1.1">
+
+        <Hosts>
+            <Host xsi:type="Mailbox">
+                <DesktopFormFactor>
+
+                    <FunctionFile resid="functionfile"/>
+
+                    <ExtensionPoint xsi:type="MessageReadCommandSurface">
+                        <OfficeTab id="TabDefault">
+                            <Group id="msgread_group">
+                                <Label resid="group_label"/>
+                                <Icon>
+                                    <bt:Image resid="icon32"/>
+                                    <bt:Image resid="icon64"/>
+                                </Icon>
+                                <Control xsi:type="Button" id="btnOpenTaskpane">
+                                    <Label resid="button_label"/>
+                                    <Supertip>
+                                        <Title resid="button_label"/>
+                                        <Description resid="button_desc"/>
+                                    </Supertip>
+                                    <Icon>
+                                        <bt:Image resid="icon32"/>
+                                        <bt:Image resid="icon64"/>
+                                    </Icon>
+                                    <Action xsi:type="ShowTaskpane">
+                                        <SourceLocation resid="taskpane_url"/>
+                                        <Title resid="taskpane_title"/>
+                                    </Action>
+                                </Control>
+                            </Group>
+                        </OfficeTab>
+                    </ExtensionPoint>
+
+                </DesktopFormFactor>
+            </Host>
+        </Hosts>
+
+        <Resources>
+            <bt:Images>
+                <bt:Image id="icon32" DefaultValue="https://localhost:5173/assets/icon-32.png"/>
+                <bt:Image id="icon64" DefaultValue="https://localhost:5173/assets/icon-64.png"/>
+            </bt:Images>
+
+            <bt:Urls>
+                <bt:Url id="functionfile" DefaultValue="https://localhost:5173/index.html"/>
+                <bt:Url id="taskpane_url" DefaultValue="https://localhost:5173/taskpane.html"/>
+            </bt:Urls>
+
+            <bt:ShortStrings>
+                <bt:String id="group_label" DefaultValue="Denkmal"/>
+                <bt:String id="button_label" DefaultValue="Open Help"/>
+                <bt:String id="taskpane_title" DefaultValue="Denkmal Help"/>
+            </bt:ShortStrings>
+
+            <bt:LongStrings>
+                <bt:String id="button_desc" DefaultValue="Open the Denkmal Help Panel"/>
+            </bt:LongStrings>
+        </Resources>
+
+        <!-- SSO HIER - erlaubt im VersionOverrides -->
+        <WebApplicationInfo>
+            <Id>91b0505d-8ed4-4b50-be6d-307f91137e4e</Id>
+            <Resource>api://91b0505d-8ed4-4b50-be6d-307f91137e4e</Resource>
+            <Scopes>
+                <Scope>access_as_user</Scope>
+            </Scopes>
+        </WebApplicationInfo>
+
+    </VersionOverrides>
+
+</OfficeApp>
